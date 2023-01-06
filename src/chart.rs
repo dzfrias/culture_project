@@ -13,6 +13,7 @@ extern "C" {
     pub fn draw(this: &LineChart, element_id: &str);
 }
 
+#[allow(dead_code)]
 #[derive(Debug)]
 pub struct Dataset {
     label: String,
