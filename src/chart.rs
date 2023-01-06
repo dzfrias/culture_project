@@ -20,7 +20,7 @@ pub struct Dataset {
     data: Vec<JsValue>,
 }
 
-#[derive(Debug, Properties, PartialEq)]
+#[derive(Debug, Properties, PartialEq, Eq)]
 pub struct Props {
     pub id: AttrValue,
 }
