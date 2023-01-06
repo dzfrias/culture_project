@@ -1,13 +1,16 @@
 name: deploy
 
 on:
-  workflow_run:
+  push:
     branches: [main]
-    workflows: [ci]
-    types: [completed]
 
 jobs:
+  use-build:
+    uses: dzfrias/culture_project/.github/workflows/ci.yml@main
+
   release:
+    needs: use-build
+
     runs-on: ubuntu-latest
     steps:
       - uses: actions-rs/toolchain@v1
