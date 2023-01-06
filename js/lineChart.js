@@ -1,15 +1,10 @@
 export class LineChart {
     chart;
 
-    constructor(labels) {        
+    constructor(labels, datasets) {        
         let data = {
             labels: labels,
-            datasets: [{
-                label: 'Widget data',
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
-                data: [10,35,30,20,25,15],
-            }]
+            datasets: datasets
         };
 
         this.config = {
