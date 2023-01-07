@@ -3,6 +3,8 @@ mod data_button;
 mod dataset_loader;
 mod topbar;
 
+use std::collections::HashMap;
+
 use chart::{Chart, Dataset};
 use data_button::DataButton;
 use dataset_loader::Chart as ChartJson;
@@ -38,6 +40,7 @@ fn app() -> Html {
     let (pop_data, pop_labels) = get_datasets(include_str!("../static/charts/test.json"));
     let (fertility_data, fertility_labels) =
         get_datasets(include_str!("../static/charts/test2.json"));
+
     let datasets = use_state(|| pop_data.clone());
     let labels = use_state(|| pop_labels.clone());
     let callback = {
@@ -48,6 +51,26 @@ fn app() -> Html {
             labels.set(data_lables);
         })
     };
+
+    let year_data: HashMap<i32, &str> =
+        serde_json::from_str(include_str!("../static/year_data/year_data.json"))
+            .expect("should have valid data");
+    let cards = (1980..2017).map(|year| {
+        let event = year_data.get(&year).unwrap_or(&"");
+        html! {
+            if event.is_empty() {
+                <div class={classes!("border-white", "border", "p-2")}>
+                    <p class={classes!("text-white")}>{ year }</p>
+                </div>
+            } else {
+                <div class={classes!("border-white", "border", "h-[30vh]", "w-[80vw]", "md:w-[50vw]", "flex", "justify-center", "items-center", "flex-col", "p-5")}>
+                    <p class={classes!("text-white", "flex-auto", "text-xl")}>{ year }</p>
+                    <p class={classes!("text-white", "flex-[3_3_0%]", "text-center")}>{ event }</p>
+                </div>
+            }
+        }
+    });
+
     html! {
         <>
             <TopBar title="The One Child Policy">
@@ -63,6 +86,9 @@ fn app() -> Html {
                     />
                 </div>
             </TopBar>
+            <div class={classes!("flex", "flex-col", "items-center", "gap-10", "my-8")}>
+                { for cards }
+            </div>
         </>
     }
 }
