@@ -12,9 +12,12 @@ extern "C" {
 
     #[wasm_bindgen(method)]
     pub fn draw(this: &LineChart, element_id: &str);
+
+    #[wasm_bindgen(method)]
+    pub fn new_config(this: &LineChart, labels: Vec<JsValue>, datasets: Vec<JsValue>);
 }
 
-#[derive(Debug, PartialEq, Properties)]
+#[derive(Debug, PartialEq, Properties, Clone)]
 pub struct Dataset {
     pub label: AttrValue,
     pub data: Vec<i32>,
@@ -90,9 +93,22 @@ impl Component for Chart {
 
     fn view(&self, ctx: &Context<Self>) -> Html {
         html! {
-            <div>
-                <canvas id={&ctx.props().id} width="600" height="500"></canvas>
-            </div>
+            <canvas id={&ctx.props().id}></canvas>
         }
+    }
+
+    fn rendered(&mut self, ctx: &Context<Self>, first_render: bool) {
+        if first_render {
+            return;
+        }
+        let props = ctx.props();
+        self.chart.new_config(
+            props.labels.clone(),
+            props
+                .datasets
+                .iter()
+                .map(|dataset| serde_wasm_bindgen::to_value(dataset).unwrap())
+                .collect(),
+        );
     }
 }

@@ -1,0 +1,13 @@
+{
+    "datasets": [
+        {
+            "label": "Nice",
+            "data": [1, 2, 3, 4, 5, 6],
+            "bg_color": "rgb(255, 255, 0)",
+            "border_color": "rgb(255, 0, 0)"
+        }
+    ],
+    "start": 1980,
+    "end": 2015,
+    "step": 5
+}

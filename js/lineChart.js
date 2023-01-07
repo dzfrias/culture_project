@@ -28,4 +28,27 @@ export class LineChart {
             this.config
         )
     }
+
+    new_config(labels, datasets) {
+        let data = {
+            labels: labels,
+            datasets: datasets
+        };
+
+        this.config = {
+            type: 'line',
+            data: data,
+            options: {
+                responsive: false,
+                scales: {
+                    y: {
+                        suggestedMin: 0,
+                        suggestedMax: 50
+                    }
+                }
+            }
+        };
+        this.chart.data = data;
+        this.chart.update();
+    }
 }
