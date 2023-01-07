@@ -51,15 +51,17 @@ fn app() -> Html {
     html! {
         <>
             <TopBar title="The One Child Policy">
-                <div class={classes!("flex", "flex-row", "flex-1", "gap-3")}>
-                    <DataButton<(Vec<Dataset>, Vec<JsValue>)> text="Population" data={(pop_data, pop_labels)} callback={callback.clone()}/>
-                    <DataButton<(Vec<Dataset>, Vec<JsValue>)> text="Fertility" data={(fertility_data, fertility_labels)} {callback}/>
+                <div class={classes!("md:flex", "md:flex-row", "md:gap-4")}>
+                    <div class={classes!("flex", "md:flex-col", "flex-1", "gap-3", "justify-center")}>
+                        <DataButton<(Vec<Dataset>, Vec<JsValue>)> text="Population" data={(pop_data, pop_labels)} callback={callback.clone()}/>
+                        <DataButton<(Vec<Dataset>, Vec<JsValue>)> text="Fertility" data={(fertility_data, fertility_labels)} {callback}/>
+                    </div>
+                    <Chart
+                        id="mainChart"
+                        datasets={(*datasets).clone()}
+                        labels={(*labels).clone()}
+                    />
                 </div>
-                <Chart
-                    id="mainChart"
-                    datasets={(*datasets).clone()}
-                    labels={(*labels).clone()}
-                />
             </TopBar>
         </>
     }
