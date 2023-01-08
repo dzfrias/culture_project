@@ -1,13 +1,14 @@
+mod cards;
 mod chart;
 mod data_button;
 mod dataset_loader;
 mod topbar;
 
-use std::collections::HashMap;
-
+use cards::Cards;
 use chart::{Chart, Dataset};
 use data_button::DataButton;
 use dataset_loader::Chart as ChartJson;
+use std::collections::HashMap;
 use topbar::TopBar;
 use wasm_bindgen::JsValue;
 use yew::{prelude::*, props};
@@ -52,25 +53,6 @@ fn app() -> Html {
         })
     };
 
-    let year_data: HashMap<i32, &str> =
-        serde_json::from_str(include_str!("../static/year_data/year_data.json"))
-            .expect("should have valid data");
-    let cards = (1980..2017).map(|year| {
-        let event = year_data.get(&year).unwrap_or(&"");
-        html! {
-            if event.is_empty() {
-                <div class={classes!("border-white", "border", "p-2")}>
-                    <p class={classes!("text-white")}>{ year }</p>
-                </div>
-            } else {
-                <div class={classes!("border-white", "border", "h-[30vh]", "w-[80vw]", "md:w-[50vw]", "flex", "justify-center", "items-center", "flex-col", "p-5")}>
-                    <p class={classes!("text-white", "flex-auto", "text-xl")}>{ year }</p>
-                    <p class={classes!("text-white", "flex-[3_3_0%]", "text-center")}>{ event }</p>
-                </div>
-            }
-        }
-    });
-
     html! {
         <>
             <TopBar title="The One Child Policy">
@@ -86,9 +68,15 @@ fn app() -> Html {
                     />
                 </div>
             </TopBar>
-            <div class={classes!("flex", "flex-col", "items-center", "gap-10", "my-8")}>
-                { for cards }
-            </div>
+            <Cards
+                start=1980
+                end=2017
+                year_data={
+                    serde_json::from_str::<HashMap<u32, String>>(
+                        include_str!("../static/year_data/year_data.json"))
+                            .expect("should have valid json")
+                }
+            />
         </>
     }
 }
