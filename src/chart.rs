@@ -13,7 +13,7 @@ extern "C" {
     #[wasm_bindgen(method)]
     pub fn draw(this: &LineChart, element_id: &str);
 
-    #[wasm_bindgen(method)]
+    #[wasm_bindgen(method, js_name = newConfig)]
     pub fn new_config(this: &LineChart, labels: Vec<JsValue>, datasets: Vec<JsValue>);
 }
 

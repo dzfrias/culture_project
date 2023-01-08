@@ -29,7 +29,7 @@ export class LineChart {
         )
     }
 
-    new_config(labels, datasets) {
+    newConfig(labels, datasets) {
         let data = {
             labels: labels,
             datasets: datasets
