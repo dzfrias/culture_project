@@ -54,7 +54,7 @@ fn app() -> Html {
         })
     };
 
-    let top_bar_height = use_state_eq(i32::default);
+    let top_bar_height = use_state_eq(|| 230);
     {
         let height = top_bar_height.clone();
         use_effect(move || {
