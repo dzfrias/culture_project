@@ -69,7 +69,11 @@ fn app() -> Html {
                 </div>
             </TopBar>
             <Cards
+                id="cards"
                 start=1980
+                // WARNING: This should change depending on the size of TopBar. There might be a
+                // cleaner way of doing this.
+                top_margin={-230}
                 end=2017
                 year_data={
                     serde_json::from_str::<HashMap<u32, String>>(
