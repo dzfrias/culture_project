@@ -313,12 +313,12 @@ function getImports() {
     imports.wbg.__wbg_draw_09aa81d37a5dcb4c = function(arg0, arg1, arg2) {
         getObject(arg0).draw(getStringFromWasm0(arg1, arg2));
     };
-    imports.wbg.__wbg_newconfig_f44d154dc0bc7df3 = function(arg0, arg1, arg2, arg3, arg4) {
+    imports.wbg.__wbg_newConfig_f44d154dc0bc7df3 = function(arg0, arg1, arg2, arg3, arg4) {
         var v0 = getArrayJsValueFromWasm0(arg1, arg2).slice();
         wasm.__wbindgen_free(arg1, arg2 * 4);
         var v1 = getArrayJsValueFromWasm0(arg3, arg4).slice();
         wasm.__wbindgen_free(arg3, arg4 * 4);
-        getObject(arg0).new_config(v0, v1);
+        getObject(arg0).newConfig(v0, v1);
     };
     imports.wbg.__wbindgen_object_clone_ref = function(arg0) {
         const ret = getObject(arg0);
@@ -673,7 +673,7 @@ function initSync(module) {
 
 async function init(input) {
     if (typeof input === 'undefined') {
-        input = new URL('culture_project-48d94fa63ef72664_bg.wasm', import.meta.url);
+        input = new URL('culture_project-7208dc3a3d4b477c_bg.wasm', import.meta.url);
     }
     const imports = getImports();
 
