@@ -10,7 +10,8 @@ use data_button::DataButton;
 use dataset_loader::Chart as ChartJson;
 use std::collections::HashMap;
 use topbar::TopBar;
-use wasm_bindgen::JsValue;
+use wasm_bindgen::{JsCast, JsValue, UnwrapThrowExt};
+use web_sys::HtmlElement;
 use yew::{prelude::*, props};
 
 fn get_datasets(s: &str) -> (Vec<Dataset>, Vec<JsValue>) {
@@ -53,6 +54,19 @@ fn app() -> Html {
         })
     };
 
+    let top_bar_height = use_state_eq(i32::default);
+    {
+        let height = top_bar_height.clone();
+        use_effect(move || {
+            let top_bar = gloo::utils::document()
+                .get_element_by_id("top-bar")
+                .expect_throw("should have a TopBar")
+                .dyn_into::<HtmlElement>()
+                .expect_throw("TopBar should be in the DOM");
+            height.set(top_bar.offset_height());
+        });
+    }
+
     html! {
         <>
             <TopBar title="The One Child Policy">
@@ -71,10 +85,8 @@ fn app() -> Html {
             <Cards
                 id="cards"
                 start=1980
-                // WARNING: This should change depending on the size of TopBar. There might be a
-                // cleaner way of doing this.
-                top_margin={-230}
                 end=2017
+                top_margin={-*top_bar_height}
                 year_data={
                     serde_json::from_str::<HashMap<u32, String>>(
                         include_str!("../static/year_data/year_data.json"))
