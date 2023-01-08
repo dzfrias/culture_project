@@ -84,8 +84,7 @@ fn app() -> Html {
             </TopBar>
             <Cards
                 id="cards"
-                start=1980
-                end=2017
+                range={1980..2017}
                 top_margin={-*top_bar_height}
                 year_data={
                     serde_json::from_str::<HashMap<u32, String>>(

@@ -1,13 +1,12 @@
 use js_sys::Array;
-use std::collections::HashMap;
+use std::{collections::HashMap, ops::Range};
 use wasm_bindgen::{prelude::Closure, JsCast, UnwrapThrowExt};
 use web_sys::{IntersectionObserver, IntersectionObserverEntry, IntersectionObserverInit};
 use yew::prelude::*;
 
 #[derive(Debug, PartialEq, Properties)]
 pub struct Props {
-    pub start: u32,
-    pub end: u32,
+    pub range: Range<u32>,
     pub year_data: HashMap<u32, String>,
     #[prop_or_default]
     pub top_margin: i32,
@@ -16,7 +15,7 @@ pub struct Props {
 
 #[function_component(Cards)]
 pub fn cards(props: &Props) -> Html {
-    let cards = (props.start..props.end).map(|year| {
+    let cards = props.range.clone().map(|year| {
         // Declared so it doesn't go out of scope as soon as its declared later
         let empty = String::new();
         let event = props.year_data.get(&year).unwrap_or(&empty);
