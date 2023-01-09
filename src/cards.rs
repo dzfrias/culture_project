@@ -25,7 +25,7 @@ pub fn cards(props: &Props) -> Html {
                     <p class={classes!("text-white")}>{ year }</p>
                 </div>
             } else {
-                <div class={classes!("border-white", "border", "h-[30vh]", "w-[80vw]", "md:w-[50vw]", "flex", "justify-center", "items-center", "flex-col", "p-5", "_has_event")}>
+                <div class={classes!("border-white", "border", "h-[200px]", "w-[min(400px,80vw)]", "flex", "justify-center", "items-center", "flex-col", "p-5", "_has_event")}>
                     <p class={classes!("text-white", "flex-auto", "text-xl")}>{ year }</p>
                     <p class={classes!("text-white", "flex-[3_3_0%]", "text-center")}>{ event }</p>
                 </div>
