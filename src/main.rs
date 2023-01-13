@@ -10,8 +10,7 @@ use data_button::DataButton;
 use dataset_loader::Chart as ChartJson;
 use std::collections::HashMap;
 use topbar::TopBar;
-use wasm_bindgen::{JsCast, JsValue, UnwrapThrowExt};
-use web_sys::HtmlElement;
+use wasm_bindgen::JsValue;
 use yew::{prelude::*, props};
 
 fn get_datasets(s: &str) -> (Vec<Dataset>, Vec<JsValue>) {
@@ -54,18 +53,9 @@ fn app() -> Html {
         })
     };
 
-    let top_bar_height = use_state_eq(|| 230);
-    {
-        let height = top_bar_height.clone();
-        use_effect(move || {
-            let top_bar = gloo::utils::document()
-                .get_element_by_id("top-bar")
-                .expect_throw("should have a TopBar")
-                .dyn_into::<HtmlElement>()
-                .expect_throw("TopBar should be in the DOM");
-            height.set(top_bar.offset_height());
-        });
-    }
+    let next_card = Callback::from(move |elem| {
+        gloo::console::log!(elem);
+    });
 
     html! {
         <>
@@ -85,12 +75,12 @@ fn app() -> Html {
             <Cards
                 id="cards"
                 range={1980..2017}
-                top_margin={-*top_bar_height}
                 year_data={
                     serde_json::from_str::<HashMap<u32, String>>(
                         include_str!("../static/year_data/year_data.json"))
                             .expect("should have valid json")
                 }
+                {next_card}
             />
         </>
     }
