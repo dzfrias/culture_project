@@ -11,7 +11,7 @@ pub struct Props {
 pub fn top_bar(props: &Props) -> Html {
     html! {
         <div class={classes!("sticky", "flex", "items-center", "gap-6", "border-b", "border-white", "text-white", "pb-4", "flex-col", "bg-neutral-800", "top-0")}>
-            <h1 class={classes!("md:text-4xl", "text-2xl")}>{ &props.title }</h1>
+            <h1 class={classes!("text-4xl", "text-center")}>{ &props.title }</h1>
             { for props.children.iter() }
         </div>
     }
