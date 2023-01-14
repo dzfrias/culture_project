@@ -53,10 +53,6 @@ fn app() -> Html {
         })
     };
 
-    let next_card = Callback::from(move |elem| {
-        gloo::console::log!(elem);
-    });
-
     html! {
         <>
             <TopBar title="The One Child Policy">
@@ -73,14 +69,13 @@ fn app() -> Html {
                 </div>
             </TopBar>
             <Cards
-                id="cards"
-                range={1980..2017}
+                start=1980
+                end=2017
                 year_data={
                     serde_json::from_str::<HashMap<u32, String>>(
                         include_str!("../static/year_data/year_data.json"))
                             .expect("should have valid json")
                 }
-                {next_card}
             />
         </>
     }
