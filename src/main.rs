@@ -56,8 +56,8 @@ fn app() -> Html {
     html! {
         <>
             <TopBar title="The One Child Policy">
-                <div class={classes!("md:flex", "md:flex-row", "md:gap-4")}>
-                    <div class={classes!("flex", "md:flex-col", "flex-1", "gap-3", "justify-center")}>
+                <div id="bar-content">
+                    <div id="side-buttons">
                         <DataButton<(Vec<Dataset>, Vec<JsValue>)> text="Population" data={(pop_data, pop_labels)} callback={callback.clone()}/>
                         <DataButton<(Vec<Dataset>, Vec<JsValue>)> text="Fertility" data={(fertility_data, fertility_labels)} {callback}/>
                     </div>

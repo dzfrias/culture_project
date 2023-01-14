@@ -16,19 +16,19 @@ pub fn cards(props: &Props) -> Html {
         let event = props.year_data.get(&year).unwrap_or(&empty);
         html! {
             if event.is_empty() {
-                <div class={classes!("border-white", "border", "p-2")}>
-                    <p class={classes!("text-white")}>{ year }</p>
+                <div>
+                    <p>{ year }</p>
                 </div>
             } else {
-                <div class={classes!("border-white", "border", "h-[200px]", "w-[min(400px,80vw)]", "flex", "justify-center", "items-center", "flex-col", "p-5")}>
-                    <p class={classes!("text-white", "flex-auto", "text-xl")}>{ year }</p>
-                    <p class={classes!("text-white", "flex-[3_3_0%]", "text-center")}>{ event }</p>
+                <div class={classes!("event-card")}>
+                    <p>{ year }</p>
+                    <p>{ event }</p>
                 </div>
             }
         }
     });
     html! {
-        <div class={classes!("flex", "flex-col", "items-center", "gap-10", "my-8")}>
+        <div class={classes!("card-group")}>
             { for cards }
         </div>
     }
