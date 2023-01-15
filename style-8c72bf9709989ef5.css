@@ -1,0 +1,164 @@
+/*
+Setup
+-----
+*/
+
+*,
+::before,
+::after {
+    box-sizing: border-box;
+    border-width: 0;
+    border-style: solid;
+    border-color: #e5e7eb;
+}
+
+blockquote,
+dl,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+figure,
+p,
+pre {
+    margin: 0;
+}
+
+/*
+Details tag
+-----------
+*/
+details summary::-webkit-details-marker {
+    display: none;
+}
+
+details summary {
+    list-style: none;
+    cursor: pointer;
+    transition: margin 150ms ease-out;
+}
+
+details summary:hover {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+details[open] summary {
+    margin-top: 10px;
+    margin-bottom: 17px;
+}
+
+/*
+General
+-------
+*/
+:root {
+    --black: #0d090a;
+    --white: #eaeaea;
+    --primary: #912f40;
+    --secondary: #e7ebc5;
+}
+
+body {
+    background: var(--black);
+    margin: 0;
+    line-height: inherit;
+    color: var(--white);
+}
+
+* {
+    font-family: 'Cormorant', serif;
+}
+
+button {
+    background-color: var(--black);
+    border: 2px groove var(--primary);
+    color: var(--secondary);
+}
+
+/*
+Top bar
+-------
+*/
+#top-bar {
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    align-items: center;
+    gap: 1.5rem;
+    border-bottom: 1px solid var(--white);
+    padding-bottom: 1rem;
+    background-color: black;
+    transition: top 0.2s;
+}
+
+#top-bar > h1:first-child {
+    font-family: 'Moon Dance', cursive;
+    font-size: 3rem;
+    text-align: center;
+}
+
+#bar-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    width: min-content;
+}
+
+#side-buttons {
+    display: flex;
+    gap: 1.25rem;
+    justify-content: center;
+}
+
+/*
+Card groups
+-----------
+*/
+.card-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    gap: 1rem;
+}
+
+.card-group > :not(.line) {
+    color: grey;
+}
+
+.card-group .event-card {
+    text-align: center;
+    color: var(--white);
+    width: 40ch;
+    line-height: 150%;
+    color: gainsboro;
+}
+
+.card-group .line:not(:last-child) {
+    height: 5rem;
+    border-left: 1px solid var(--primary);
+}
+
+.card-group .event-card > :first-child {
+    font-size: 1.75rem;
+    color: gainsboro;
+    width: min-content;
+    margin-left: auto;
+    margin-right: auto;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.card-group .event-card[open] > :first-child,
+.card-group .event-card > :first-child:hover {
+    color: var(--secondary);
+}
