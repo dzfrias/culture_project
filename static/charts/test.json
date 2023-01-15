@@ -3,8 +3,8 @@
         {
             "label": "Test",
             "data": [1, 2, 3, 4, 5],
-            "bg_color": "rgb(255, 255, 0)",
-            "border_color": "rgb(255, 0, 0)"
+            "bg_color": "rgb(255, 255, 255)",
+            "border_color": "rgb(255, 255, 255)"
         }
     ],
     "start": 1980,

@@ -16,14 +16,20 @@ pub fn cards(props: &Props) -> Html {
         let event = props.year_data.get(&year).unwrap_or(&empty);
         html! {
             if event.is_empty() {
-                <div>
-                    <p>{ year }</p>
-                </div>
+                <>
+                    <div>
+                        <p>{ year }</p>
+                    </div>
+                    <div class={classes!("line")}></div>
+                </>
             } else {
-                <div class={classes!("event-card")}>
-                    <p>{ year }</p>
-                    <p>{ event }</p>
-                </div>
+                <>
+                    <details class={classes!("event-card")}>
+                        <summary>{ year }</summary>
+                        <p>{ event }</p>
+                    </details>
+                    <div class={classes!("line")}></div>
+                </>
             }
         }
     });
