@@ -45,8 +45,8 @@ body {
     gap: 1.5rem;
     border-bottom: 1px solid white;
     padding-bottom: 1rem;
-    top: 0;
     background-color: black;
+    transition: top 0.2s;
 }
 
 #top-bar > h1:first-child {
