@@ -2,12 +2,14 @@ mod cards;
 mod chart;
 mod data_button;
 mod dataset_loader;
+mod quote;
 mod topbar;
 
 use cards::Cards;
 use chart::{Chart, Dataset};
 use data_button::DataButton;
 use dataset_loader::Chart as ChartJson;
+use quote::Quote;
 use std::collections::HashMap;
 use topbar::TopBar;
 use wasm_bindgen::JsValue;
@@ -68,6 +70,9 @@ fn app() -> Html {
                     />
                 </div>
             </TopBar>
+            <Quote top=30 left=10>
+                <p>{ "This is very very important and very awesome and cool and sick and amazing" }</p>
+            </Quote>
             <Cards
                 range={1980..2017}
                 year_data={
@@ -76,6 +81,7 @@ fn app() -> Html {
                             .expect("should have valid json")
                 }
             />
+            <div id="overlay"></div>
         </>
     }
 }
