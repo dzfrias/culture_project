@@ -1,5 +1,5 @@
 use wasm_bindgen::JsCast;
-use web_sys::{Element, HtmlElement, IntersectionObserver};
+use web_sys::HtmlElement;
 use yew::prelude::*;
 use yew_hooks::prelude::*;
 
@@ -8,8 +8,6 @@ pub struct Props {
     pub children: Children,
     pub top: u32,
     pub left: u32,
-    #[prop_or_default]
-    pub observer: Option<IntersectionObserver>,
 }
 
 fn get_overlay() -> HtmlElement {
@@ -23,18 +21,6 @@ fn get_overlay() -> HtmlElement {
 #[function_component(Quote)]
 pub fn quote(props: &Props) -> Html {
     let quote_ref = use_node_ref();
-
-    {
-        let quote_ref = quote_ref.clone();
-        let observer = props.observer.clone();
-        use_effect_once(move || {
-            if let Some(observer) = observer {
-                let quote = quote_ref.cast::<Element>().unwrap();
-                observer.observe(&quote);
-            }
-            || ()
-        })
-    }
 
     let window = use_window_size();
     let expanded = use_bool_toggle(true);
