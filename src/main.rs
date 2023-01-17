@@ -126,7 +126,6 @@ fn app() -> Html {
                     </Quote>
                 </div>
             </div>
-            <div id="overlay"></div>
         </>
     }
 }
