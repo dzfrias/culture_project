@@ -9,10 +9,14 @@ use cards::Cards;
 use chart::{Chart, Dataset};
 use data_button::DataButton;
 use dataset_loader::Chart as ChartJson;
+use js_sys::Array;
 use quote::Quote;
-use std::collections::HashMap;
+use std::{collections::HashMap, rc::Rc};
 use topbar::TopBar;
-use wasm_bindgen::JsValue;
+use wasm_bindgen::{prelude::Closure, JsCast, JsValue};
+use web_sys::{
+    HtmlElement, IntersectionObserver, IntersectionObserverEntry, IntersectionObserverInit,
+};
 use yew::{prelude::*, props};
 
 fn get_datasets(s: &str) -> (Vec<Dataset>, Vec<JsValue>) {
@@ -55,6 +59,38 @@ fn app() -> Html {
         })
     };
 
+    let quote_observer = {
+        let callback = Closure::wrap(Box::new(move |entries: Array| {
+            entries.for_each(&mut |entry, _, _| {
+                let entry = entry.dyn_into::<IntersectionObserverEntry>().unwrap();
+                if entry.is_intersecting() {
+                    entry
+                        .target()
+                        .dyn_into::<HtmlElement>()
+                        .unwrap()
+                        .style()
+                        .set_property("opacity", "1")
+                        .unwrap();
+                } else {
+                    entry
+                        .target()
+                        .dyn_into::<HtmlElement>()
+                        .unwrap()
+                        .style()
+                        .set_property("opacity", "0.6")
+                        .unwrap();
+                }
+            })
+        }) as Box<dyn FnMut(_)>);
+        let mut opts = IntersectionObserverInit::new();
+        opts.root_margin("-45% 0 -10% 0");
+        let observer =
+            IntersectionObserver::new_with_options(callback.as_ref().unchecked_ref(), &opts)
+                .unwrap();
+        callback.forget();
+        Rc::new(observer)
+    };
+
     html! {
         <>
             <TopBar title="The One Child Policy">
@@ -70,17 +106,26 @@ fn app() -> Html {
                     />
                 </div>
             </TopBar>
-            <Quote top=30 left=10>
-                <p>{ "This is very very important and very awesome and cool and sick and amazing" }</p>
-            </Quote>
-            <Cards
-                range={1980..2017}
-                year_data={
-                    serde_json::from_str::<HashMap<u32, String>>(
-                        include_str!("../static/year_data/year_data.json"))
-                            .expect("should have valid json")
-                }
-            />
+            <div class={classes!("side-by-side")}>
+                <div class={classes!("quote-bar")}>
+                    <Quote top=5 observer={Some(quote_observer.clone())} alignment="end">
+                        <p>{ "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat." }</p>
+                    </Quote>
+                </div>
+                <Cards
+                    range={1980..2017}
+                    year_data={
+                        serde_json::from_str::<HashMap<u32, String>>(
+                            include_str!("../static/year_data/year_data.json"))
+                                .expect("should have valid json")
+                    }
+                />
+                <div class={classes!("quote-bar")}>
+                    <Quote top=30 observer={Some(quote_observer.clone())} alignment="start">
+                        <p>{ "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat." }</p>
+                    </Quote>
+                </div>
+            </div>
             <div id="overlay"></div>
         </>
     }
