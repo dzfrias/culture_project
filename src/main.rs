@@ -83,7 +83,7 @@ fn app() -> Html {
             })
         }) as Box<dyn FnMut(_)>);
         let mut opts = IntersectionObserverInit::new();
-        opts.root_margin("-45% 0 -10% 0");
+        opts.root_margin("-53% 0 -10% 0");
         let observer =
             IntersectionObserver::new_with_options(callback.as_ref().unchecked_ref(), &opts)
                 .unwrap();
