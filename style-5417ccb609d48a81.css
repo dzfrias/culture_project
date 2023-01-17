@@ -2,7 +2,6 @@
 Setup
 -----
 */
-
 *,
 ::before,
 ::after {
@@ -50,24 +49,6 @@ details summary:hover {
 details[open] summary {
     margin-top: 10px;
     margin-bottom: 17px;
-}
-
-.block {
-    width: 10px;
-    height: 50px;
-    overflow: hidden;
-    color: white;
-    cursor: pointer;
-    background-color: white;
-    -moz-user-select: -moz-none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    -o-user-select: none;
-    user-select: none;
-}
-
-.block * {
-    opacity: 0;
 }
 
 /*
@@ -208,21 +189,4 @@ Quote
     top: var(--top);
     transition: opacity 0.6s;
     opacity: 0.6;
-}
-
-/*
-Overlay
--------
-*/
-#overlay {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: #000;
-    opacity: .6;
-    z-index: 3;
-    filter: alpha(opacity=60);
-    visibility: hidden;
 }
