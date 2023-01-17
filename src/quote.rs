@@ -6,7 +6,7 @@ use yew_hooks::prelude::*;
 #[derive(Debug, PartialEq, Properties)]
 pub struct Props {
     pub children: Children,
-    pub top: u32,
+    pub top: i32,
     #[prop_or_default]
     pub observer: Option<Rc<IntersectionObserver>>,
     #[prop_or("end".into())]

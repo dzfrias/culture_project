@@ -1,15 +1,15 @@
 mod cards;
 mod chart;
 mod data_button;
-mod dataset_loader;
+mod json_load;
 mod quote;
 mod topbar;
 
 use cards::Cards;
 use chart::{Chart, Dataset};
 use data_button::DataButton;
-use dataset_loader::Chart as ChartJson;
 use js_sys::Array;
+use json_load::{Alignment, Chart as ChartJson, Quotes as QuotesJson, Side};
 use quote::Quote;
 use std::{collections::HashMap, rc::Rc};
 use topbar::TopBar;
@@ -91,6 +91,30 @@ fn app() -> Html {
         Rc::new(observer)
     };
 
+    let mut bar1_quotes = Vec::new();
+    let mut bar2_quotes = Vec::new();
+    serde_json::from_str::<QuotesJson>(include_str!("../static/quotes/quotes.json"))
+        .expect("should have valid dataset")
+        .quotes
+        .into_iter()
+        .for_each(|quote| {
+            let alignment = match quote.alignment {
+                Alignment::Start => "start",
+                Alignment::Center => "center",
+                Alignment::End => "end",
+            };
+            let node = html! {
+                <Quote top={quote.top} {alignment} observer={quote_observer.clone()}>
+                    <p>{ quote.text }</p>
+                    </Quote>
+            };
+            if quote.side == Side::Left {
+                bar1_quotes.push(node);
+            } else {
+                bar2_quotes.push(node);
+            }
+        });
+
     html! {
         <>
             <TopBar title="The One Child Policy">
@@ -108,9 +132,7 @@ fn app() -> Html {
             </TopBar>
             <div class={classes!("side-by-side")}>
                 <div class={classes!("quote-bar")}>
-                    <Quote top=5 observer={Some(quote_observer.clone())} alignment="end">
-                        <p>{ "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat." }</p>
-                    </Quote>
+                    { for bar1_quotes }
                 </div>
                 <Cards
                     range={1980..2017}
@@ -121,9 +143,7 @@ fn app() -> Html {
                     }
                 />
                 <div class={classes!("quote-bar")}>
-                    <Quote top=30 observer={Some(quote_observer.clone())} alignment="start">
-                        <p>{ "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat." }</p>
-                    </Quote>
+                    { for bar2_quotes }
                 </div>
             </div>
         </>
