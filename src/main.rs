@@ -106,7 +106,7 @@ fn app() -> Html {
             let node = html! {
                 <Quote top={quote.top} {alignment} observer={quote_observer.clone()}>
                     <p>{ quote.text }</p>
-                    </Quote>
+                </Quote>
             };
             if quote.side == Side::Left {
                 bar1_quotes.push(node);

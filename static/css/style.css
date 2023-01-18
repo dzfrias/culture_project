@@ -166,6 +166,7 @@ Event card
     width: 40ch;
     line-height: 150%;
     color: gainsboro;
+    white-space: pre-wrap;
 }
 
 .event-card > :first-child {
