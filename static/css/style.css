@@ -93,6 +93,11 @@ button:hover {
     grid-template-columns: repeat(3, 1fr);
 }
 
+.line {
+    height: 5rem;
+    border-left: 1px solid var(--primary);
+}
+
 /*
 Top bar
 -------
@@ -143,11 +148,19 @@ Card groups
     min-width: 0;
 }
 
-.card-group > :not(.line) {
+.card-group > :not(.event-card) {
     color: grey;
 }
 
-.card-group .event-card {
+.card-group .line:last-child {
+    display: none;
+}
+
+/*
+Event card
+----------
+*/
+.event-card {
     text-align: center;
     color: var(--white);
     width: 40ch;
@@ -155,12 +168,7 @@ Card groups
     color: gainsboro;
 }
 
-.card-group .line:not(:last-child) {
-    height: 5rem;
-    border-left: 1px solid var(--primary);
-}
-
-.card-group .event-card > :first-child {
+.event-card > :first-child {
     font-size: 1.75rem;
     color: gainsboro;
     width: min-content;
@@ -168,8 +176,8 @@ Card groups
     margin-right: auto;
 }
 
-.card-group .event-card[open] > :first-child,
-.card-group .event-card > :first-child:hover {
+.event-card[open] > :first-child,
+.event-card > :first-child:hover {
     color: var(--secondary);
 }
 
