@@ -77,6 +77,16 @@ button {
     background-color: var(--black);
     border: 2px groove var(--primary);
     color: var(--secondary);
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: transform .3s ease-out;
+}
+
+button:hover {
+    background-color: var(--secondary);
+    border: 2px groove var(--primary);
+    color: var(--black);
+    transform: translate(0, -3px);
 }
 
 .side-by-side {
@@ -187,10 +197,11 @@ Quote
     padding: 10px;
     position: relative;
     top: var(--top);
-    transition: opacity 0.6s;
+    transition: opacity 0.6s, transform .3s ease-out;
     opacity: 0.6;
 }
 
 .quote:hover {
     opacity: 1.0 !important;
+    transform: translate(0, -3px);
 }
