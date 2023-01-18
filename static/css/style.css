@@ -84,7 +84,6 @@ button {
 
 button:hover {
     background-color: var(--secondary);
-    border: 2px groove var(--primary);
     color: var(--black);
     transform: translate(0, -3px);
 }
