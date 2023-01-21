@@ -219,11 +219,10 @@ Event card
 }
 
 /*
-Quote
------
+Side-bar
+--------
 */
-
-.quote-bar {
+.side-bar {
     display: flex;
     flex-direction: column;
     align-items: end;
@@ -231,10 +230,14 @@ Quote
     padding-right: 1rem;
 }
 
-.quote-bar > * {
+.side-bar > * {
     align-self: var(--alignment);
 }
 
+/*
+Quote
+-----
+*/
 .quote {
     border-left: 1px solid var(--white);
     max-width: 40ch;
@@ -242,7 +245,6 @@ Quote
     position: relative;
     top: var(--top);
     transition: opacity 0.6s, transform .3s ease-out;
-    opacity: 0.6;
 }
 
 .quote:hover {

@@ -8,7 +8,7 @@ use cards::Cards;
 use chart::{Chart, Dataset};
 use data_button::DataButton;
 use js_sys::Array;
-use json_load::{Alignment, Chart as ChartJson, Quotes as QuotesJson, Side};
+use json_load::Chart as ChartJson;
 use quote::Quote;
 use std::{collections::HashMap, rc::Rc};
 use wasm_bindgen::{prelude::Closure, JsCast, JsValue};
@@ -16,6 +16,7 @@ use web_sys::{
     HtmlElement, IntersectionObserver, IntersectionObserverEntry, IntersectionObserverInit,
 };
 use yew::{prelude::*, props};
+use yew_hooks::prelude::*;
 
 fn get_datasets(s: &str) -> (Vec<Dataset>, Vec<JsValue>) {
     let chart: ChartJson = serde_json::from_str(s).expect("Should have valid chart data");
@@ -89,29 +90,20 @@ fn app() -> Html {
         Rc::new(observer)
     };
 
-    let mut bar1_quotes = Vec::new();
-    let mut bar2_quotes = Vec::new();
-    serde_json::from_str::<QuotesJson>(include_str!("../static/quotes/quotes.json"))
-        .expect("should have valid dataset")
-        .quotes
-        .into_iter()
-        .for_each(|quote| {
-            let alignment = match quote.alignment {
-                Alignment::Start => "start",
-                Alignment::Center => "center",
-                Alignment::End => "end",
-            };
-            let node = html! {
-                <Quote top={quote.top} {alignment} observer={quote_observer.clone()}>
-                    <p>{ quote.text }</p>
-                </Quote>
-            };
-            if quote.side == Side::Left {
-                bar1_quotes.push(node);
-            } else {
-                bar2_quotes.push(node);
+    {
+        let quote_observer = quote_observer.clone();
+        use_effect_once(move || {
+            let elems = gloo::utils::document().get_elements_by_class_name("side-bar");
+            for i in 0..elems.length() {
+                let side_bar_children = elems.item(i).expect("should be in collection").children();
+                for i in 0..side_bar_children.length() {
+                    let elem = side_bar_children.item(i).expect("should be in collection");
+                    quote_observer.observe(&elem)
+                }
             }
+            || ()
         });
+    }
 
     html! {
         <>
@@ -135,8 +127,8 @@ fn app() -> Html {
             <h1><a href="#timeline">{ "Timeline" }</a></h1>
             <hr/>
             <div class={classes!("side-by-side")}>
-                <div class={classes!("quote-bar")}>
-                    { for bar1_quotes }
+                <div class={classes!("side-bar")}>
+                    <Quote text="Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat." top=10 alignment="end"/>
                 </div>
                 <Cards
                     range={1980..2017}
@@ -146,8 +138,8 @@ fn app() -> Html {
                                 .expect("should have valid json")
                     }
                 />
-                <div class={classes!("quote-bar")}>
-                    { for bar2_quotes }
+                <div class={classes!("side-bar")}>
+                    <Quote text="Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat." top=30 alignment="start"/>
                 </div>
             </div>
         </>
