@@ -106,7 +106,6 @@ button:hover {
     transform: translate(0, -3px);
 }
 
-
 /*
 Mini-classes
 ------------
@@ -126,6 +125,11 @@ Mini-classes
     width: min-content;
     gap: 1rem;
     margin: auto;
+}
+
+.fit {
+    max-width: 100%;
+    height: auto;
 }
 
 /*
@@ -231,6 +235,8 @@ Side-bar
 }
 
 .side-bar > * {
+    position: relative;
+    top: var(--top);
     align-self: var(--alignment);
 }
 
@@ -242,8 +248,6 @@ Quote
     border-left: 1px solid var(--white);
     max-width: 40ch;
     padding: 10px;
-    position: relative;
-    top: var(--top);
     transition: opacity 0.6s, transform .3s ease-out;
 }
 
