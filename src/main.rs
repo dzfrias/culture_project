@@ -129,6 +129,8 @@ fn app() -> Html {
             <div class={classes!("side-by-side")}>
                 <div class={classes!("side-bar")}>
                     <Quote text="Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat." top=10 alignment="end"/>
+                    <Quote text="Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat." top=30 alignment="center"/>
+                    <img src="./img/gathering.jpeg" alt="A gathering forms around a One Child Policy announcement" class={classes!("fit")} style="--top: 40%;"/>
                 </div>
                 <Cards
                     range={1980..2017}
@@ -139,7 +141,8 @@ fn app() -> Html {
                     }
                 />
                 <div class={classes!("side-bar")}>
-                    <Quote text="Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat." top=30 alignment="start"/>
+                    <img src="./img/one_child.jpeg" alt="A poster describing the ideal situation involving one child" class={classes!("fit")} style="--top: 20%;"/>
+                    <img src="./img/one_child2.jpeg" alt="A poster saying that giving birth to one child is everyone's responsibility" class={classes!("fit")} style="--top: 60%;"/>
                 </div>
             </div>
         </>
