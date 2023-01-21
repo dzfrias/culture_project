@@ -93,7 +93,9 @@ impl Component for Chart {
 
     fn view(&self, ctx: &Context<Self>) -> Html {
         html! {
-            <canvas id={&ctx.props().id}></canvas>
+            <div class={classes!("chart")}>
+                <canvas id={&ctx.props().id}></canvas>
+            </div>
         }
     }
 

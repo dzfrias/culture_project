@@ -3,7 +3,6 @@ mod chart;
 mod data_button;
 mod json_load;
 mod quote;
-mod topbar;
 
 use cards::Cards;
 use chart::{Chart, Dataset};
@@ -12,7 +11,6 @@ use js_sys::Array;
 use json_load::{Alignment, Chart as ChartJson, Quotes as QuotesJson, Side};
 use quote::Quote;
 use std::{collections::HashMap, rc::Rc};
-use topbar::TopBar;
 use wasm_bindgen::{prelude::Closure, JsCast, JsValue};
 use web_sys::{
     HtmlElement, IntersectionObserver, IntersectionObserverEntry, IntersectionObserverInit,
@@ -117,19 +115,25 @@ fn app() -> Html {
 
     html! {
         <>
-            <TopBar title="The One Child Policy">
-                <div id="bar-content">
-                    <div id="side-buttons">
-                        <DataButton<(Vec<Dataset>, Vec<JsValue>)> text="Population" data={(pop_data, pop_labels)} callback={callback.clone()}/>
-                        <DataButton<(Vec<Dataset>, Vec<JsValue>)> text="Fertility" data={(fertility_data, fertility_labels)} {callback}/>
-                    </div>
-                    <Chart
-                        id="mainChart"
-                        datasets={(*datasets).clone()}
-                        labels={(*labels).clone()}
-                    />
+            <div class="navbar">
+                <h1>{ "The One Child Policy" }</h1>
+                <span>{ "独生子女政策" }</span>
+            </div>
+            <h1><a href="#charts">{ "Chart" }</a></h1>
+            <hr/>
+            <div class={classes!("center")} >
+                <div class={classes!("side-by-side", "min-center")}>
+                    <DataButton<(Vec<Dataset>, Vec<JsValue>)> text="Population" data={(pop_data, pop_labels)} callback={callback.clone()}/>
+                    <DataButton<(Vec<Dataset>, Vec<JsValue>)> text="Fertility" data={(fertility_data, fertility_labels)} {callback}/>
                 </div>
-            </TopBar>
+                <Chart
+                    id="main-chart"
+                    datasets={(*datasets).clone()}
+                    labels={(*labels).clone()}
+                />
+            </div>
+            <h1><a href="#timeline">{ "Timeline" }</a></h1>
+            <hr/>
             <div class={classes!("side-by-side")}>
                 <div class={classes!("quote-bar")}>
                     { for bar1_quotes }
