@@ -113,7 +113,7 @@ fn app() -> Html {
             </div>
             <h1><a href="#charts">{ "Chart" }</a></h1>
             <hr/>
-            <div class={classes!("center")} >
+            <div class={classes!("center", "media-small")} >
                 <div class={classes!("side-by-side", "min-center")}>
                     <DataButton<(Vec<Dataset>, Vec<JsValue>)> text="Population" data={(pop_data, pop_labels)} callback={callback.clone()}/>
                     <DataButton<(Vec<Dataset>, Vec<JsValue>)> text="Fertility" data={(fertility_data, fertility_labels)} {callback}/>

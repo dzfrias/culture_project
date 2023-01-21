@@ -132,6 +132,13 @@ Mini-classes
     height: auto;
 }
 
+@media screen and (min-width: 700px) {
+    .media-small {
+        width: 60%;
+        margin: auto;
+    }
+}
+
 /*
 Navbar
 ------
@@ -202,7 +209,7 @@ Event card
 .event-card {
     text-align: center;
     color: var(--white);
-    width: 40ch;
+    width: 35ch;
     line-height: 150%;
     color: gainsboro;
     white-space: pre-wrap;
