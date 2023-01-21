@@ -82,15 +82,39 @@ button {
     transition: transform .3s ease-out;
 }
 
+h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+a {
+    text-decoration: none;
+    color: var(--white);
+}
+
+hr {
+    border-top: 1px solid var(--secondary);
+    width: 33%;
+    margin: auto;
+    margin-bottom: 2rem;
+}
+
 button:hover {
     background-color: var(--secondary);
     color: var(--black);
     transform: translate(0, -3px);
 }
 
+
+/*
+Mini-classes
+------------
+*/
 .side-by-side {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-auto-columns: 1fr;
+    grid-auto-flow: column;
 }
 
 .line {
@@ -98,40 +122,51 @@ button:hover {
     border-left: 1px solid var(--primary);
 }
 
+.min-center {
+    width: min-content;
+    gap: 1rem;
+    margin: auto;
+}
+
 /*
-Top bar
--------
+Navbar
+------
 */
-#top-bar {
+.navbar {
     display: flex;
     flex-direction: column;
-    position: sticky;
     align-items: center;
-    gap: 1.5rem;
     border-bottom: 1px solid var(--white);
     padding-bottom: 1rem;
     background-color: black;
-    transition: top 0.2s;
     z-index: 5;
+    position: sticky;
+    top: 0;
 }
 
-#top-bar > h1:first-child {
+.navbar span {
+    font-size: 1.4rem;
+    font-family: 'Noto Serif SC', serif;
+    letter-spacing: 0.5rem;
+}
+
+.navbar h1 {
     font-size: 3rem;
+    margin-top: 0;
     text-align: center;
 }
 
-#bar-content {
+/*
+Chart
+-----
+*/
+.chart {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 0.5rem;
-    width: min-content;
 }
 
-#side-buttons {
-    display: flex;
-    gap: 1.25rem;
-    justify-content: center;
+.chart canvas {
+    width: 50%;
 }
 
 /*
@@ -167,6 +202,7 @@ Event card
     line-height: 150%;
     color: gainsboro;
     white-space: pre-wrap;
+    font-size: 1.2rem;
 }
 
 .event-card > :first-child {
