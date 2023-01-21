@@ -11,7 +11,6 @@ export class LineChart {
             type: 'line',
             data: data,
             options: {
-                responsive: false,
                 scales: {
                     y: {
                         suggestedMin: 0,
@@ -39,7 +38,6 @@ export class LineChart {
             type: 'line',
             data: data,
             options: {
-                responsive: false,
                 scales: {
                     y: {
                         suggestedMin: 0,
