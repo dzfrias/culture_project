@@ -122,9 +122,9 @@ Mini-classes
 }
 
 .min-center {
-    width: min-content;
+    display: flex;
+    justify-content: center;
     gap: 1rem;
-    margin: auto;
 }
 
 .fit {

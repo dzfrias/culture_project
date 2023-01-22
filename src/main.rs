@@ -18,7 +18,7 @@ use web_sys::{
 use yew::{prelude::*, props};
 use yew_hooks::prelude::*;
 
-fn get_datasets(s: &str) -> (Vec<Dataset>, Vec<JsValue>) {
+fn get_datasets(s: &str) -> (Vec<Dataset>, Vec<JsValue>, JsValue) {
     let chart: ChartJson = serde_json::from_str(s).expect("Should have valid chart data");
     let labels = (chart.start..=chart.end)
         .step_by(chart.step)
@@ -38,24 +38,30 @@ fn get_datasets(s: &str) -> (Vec<Dataset>, Vec<JsValue>) {
             }
         })
         .collect::<Vec<_>>();
-    (datasets, labels)
+    let opts = serde_wasm_bindgen::to_value(&chart.opts).unwrap();
+    (datasets, labels, opts)
 }
 
 #[function_component(App)]
 fn app() -> Html {
-    let (pop_data, pop_labels) = get_datasets(include_str!("../static/charts/test.json"));
-    let (fertility_data, fertility_labels) =
+    let (pop_data, pop_labels, pop_opts) = get_datasets(include_str!("../static/charts/test.json"));
+    let (fertility_data, fertility_labels, fertility_opts) =
         get_datasets(include_str!("../static/charts/test2.json"));
 
     let datasets = use_state(|| pop_data.clone());
     let labels = use_state(|| pop_labels.clone());
+    let opts = use_state(|| pop_opts.clone());
     let callback = {
         let datasets = datasets.clone();
+        let opts = opts.clone();
         let labels = labels.clone();
-        Callback::from(move |(data, data_lables): (Vec<Dataset>, Vec<JsValue>)| {
-            datasets.set(data);
-            labels.set(data_lables);
-        })
+        Callback::from(
+            move |(data, data_lables, options): (Vec<Dataset>, Vec<JsValue>, JsValue)| {
+                datasets.set(data);
+                labels.set(data_lables);
+                opts.set(options);
+            },
+        )
     };
 
     let quote_observer = {
@@ -115,13 +121,14 @@ fn app() -> Html {
             <hr/>
             <div class={classes!("center", "media-small")} >
                 <div class={classes!("side-by-side", "min-center")}>
-                    <DataButton<(Vec<Dataset>, Vec<JsValue>)> text="Population" data={(pop_data, pop_labels)} callback={callback.clone()}/>
-                    <DataButton<(Vec<Dataset>, Vec<JsValue>)> text="Fertility" data={(fertility_data, fertility_labels)} {callback}/>
+                    <DataButton<(Vec<Dataset>, Vec<JsValue>, JsValue)> text="Median Age" data={(pop_data, pop_labels, pop_opts)} callback={callback.clone()}/>
+                    <DataButton<(Vec<Dataset>, Vec<JsValue>, JsValue)> text="Fertility" data={(fertility_data, fertility_labels, fertility_opts)} {callback}/>
                 </div>
                 <Chart
                     id="main-chart"
                     datasets={(*datasets).clone()}
                     labels={(*labels).clone()}
+                    opts={(*opts).clone()}
                 />
             </div>
             <h1><a href="#timeline">{ "Timeline" }</a></h1>

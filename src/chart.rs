@@ -8,19 +8,24 @@ extern "C" {
     pub type LineChart;
 
     #[wasm_bindgen(constructor)]
-    pub fn new(labels: Vec<JsValue>, datasets: Vec<JsValue>) -> LineChart;
+    pub fn new(labels: Vec<JsValue>, datasets: Vec<JsValue>, opts: JsValue) -> LineChart;
 
     #[wasm_bindgen(method)]
     pub fn draw(this: &LineChart, element_id: &str);
 
     #[wasm_bindgen(method, js_name = newConfig)]
-    pub fn new_config(this: &LineChart, labels: Vec<JsValue>, datasets: Vec<JsValue>);
+    pub fn new_config(
+        this: &LineChart,
+        labels: Vec<JsValue>,
+        datasets: Vec<JsValue>,
+        opts: JsValue,
+    );
 }
 
 #[derive(Debug, PartialEq, Properties, Clone)]
 pub struct Dataset {
     pub label: AttrValue,
-    pub data: Vec<i32>,
+    pub data: Vec<f32>,
     #[prop_or("rgb(255, 255, 255)".into())]
     pub bg_color: AttrValue,
     #[prop_or("rgb(255, 255, 255)".into())]
@@ -46,6 +51,7 @@ pub struct Props {
     pub id: AttrValue,
     pub datasets: Vec<Dataset>,
     pub labels: Vec<JsValue>,
+    pub opts: JsValue,
 }
 
 pub enum Msg {
@@ -77,6 +83,7 @@ impl Component for Chart {
                     .iter()
                     .map(|dataset| serde_wasm_bindgen::to_value(dataset).unwrap())
                     .collect(),
+                props.opts.clone(),
             ),
             draw_timer: stand_alone_timer,
         }
@@ -111,6 +118,7 @@ impl Component for Chart {
                 .iter()
                 .map(|dataset| serde_wasm_bindgen::to_value(dataset).unwrap())
                 .collect(),
+            props.opts.clone(),
         );
     }
 }

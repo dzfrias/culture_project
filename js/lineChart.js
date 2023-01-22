@@ -1,7 +1,19 @@
+function map_to_object(map) {
+    const out = Object.create(null);
+    map.forEach((value, key) => {
+      if (value instanceof Map) {
+        out[key] = map_to_object(value);
+      } else {
+        out[key] = value;
+      }
+    });
+    return out;
+}
+
 export class LineChart {
     chart;
 
-    constructor(labels, datasets) {        
+    constructor(labels, datasets, opts) {        
         let data = {
             labels: labels,
             datasets: datasets
@@ -10,14 +22,7 @@ export class LineChart {
         this.config = {
             type: 'line',
             data: data,
-            options: {
-                scales: {
-                    y: {
-                        suggestedMin: 0,
-                        suggestedMax: 50
-                    }
-                }
-            }
+            options: map_to_object(opts),
         };
     }
 
@@ -28,25 +33,14 @@ export class LineChart {
         )
     }
 
-    newConfig(labels, datasets) {
+    newConfig(labels, datasets, opts) {
         let data = {
             labels: labels,
             datasets: datasets
         };
 
-        this.config = {
-            type: 'line',
-            data: data,
-            options: {
-                scales: {
-                    y: {
-                        suggestedMin: 0,
-                        suggestedMax: 50
-                    }
-                }
-            }
-        };
         this.chart.data = data;
+        this.chart.options = map_to_object(opts);
         this.chart.update();
     }
 }

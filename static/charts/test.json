@@ -1,13 +1,35 @@
 {
     "datasets": [
         {
-            "label": "Test",
-            "data": [1, 2, 3, 4, 5],
+            "label": "China",
+            "data": [19.9, 18.5, 18.0, 19.0, 20.8, 21.7, 23.7, 26.1, 28.9, 31.7, 34.1, 35.6, 37.4],
+            "bg_color": "#de314e",
+            "border_color": "#de314e"
+        },
+        {
+            "label": "World",
+            "data": [21.5, 20.8, 20.3, 20.7, 21.5, 22.0, 23.0, 24.1, 25.2, 26.3, 27.3, 28.5, 29.7],
             "bg_color": "rgb(255, 255, 255)",
             "border_color": "rgb(255, 255, 255)"
         }
     ],
-    "start": 1980,
-    "end": 2015,
-    "step": 5
+    "start": 1960,
+    "end": 2020,
+    "step": 5,
+    "opts": {
+        "scales": {
+            "y": {
+                "title": {
+                    "text": "Years",
+                    "display": true
+                }
+            }
+        },
+        "plugins": {
+            "title": {
+                "display": true,
+                "text": "Median Age"
+            }
+        }
+    }
 }
