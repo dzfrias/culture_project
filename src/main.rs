@@ -44,9 +44,10 @@ fn get_datasets(s: &str) -> (Vec<Dataset>, Vec<JsValue>, JsValue) {
 
 #[function_component(App)]
 fn app() -> Html {
-    let (age_data, age_labels, age_opts) = get_datasets(include_str!("../static/charts/test.json"));
+    let (age_data, age_labels, age_opts) =
+        get_datasets(include_str!("../static/charts/median_age.json"));
     let (fertility_data, fertility_labels, fertility_opts) =
-        get_datasets(include_str!("../static/charts/test2.json"));
+        get_datasets(include_str!("../static/charts/fertility.json"));
     let (pop_data, pop_labels, pop_opts) =
         get_datasets(include_str!("../static/charts/rate_of_pop_change.json"));
     let (planning_data, planning_labels, planning_opts) =
