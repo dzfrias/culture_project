@@ -261,6 +261,12 @@ Side-bar
     position: relative;
     top: var(--top);
     align-self: var(--alignment);
+    transition: opacity 0.6s, transform .3s ease-out;
+}
+
+.side-bar > :hover {
+    opacity: 1.0 !important;
+    transform: translate(0, -3px);
 }
 
 /*
@@ -274,10 +280,4 @@ Quote
     gap: 0;
     font-size: 1.1rem;
     font-style: italic;
-    transition: opacity 0.6s, transform .3s ease-out;
-}
-
-.quote:hover {
-    opacity: 1.0 !important;
-    transform: translate(0, -3px);
 }
