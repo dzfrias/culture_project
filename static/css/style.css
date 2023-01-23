@@ -116,6 +116,10 @@ Mini-classes
     grid-auto-flow: column;
 }
 
+.side-by-side > :nth-child(2) {
+    z-index: 2;
+}
+
 .line {
     height: 5rem;
     border-left: 1px solid var(--primary);
@@ -123,6 +127,7 @@ Mini-classes
 
 .min-center {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
 }
@@ -214,6 +219,13 @@ Event card
     color: gainsboro;
     white-space: pre-wrap;
     font-size: 1.2rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.event-card[open] {
+    -webkit-backdrop-filter: blur(3px) brightness(60%);
+    backdrop-filter: blur(3px) brightness(60%);
 }
 
 .event-card > :first-child {
@@ -238,7 +250,6 @@ Side-bar
     flex-direction: column;
     align-items: end;
     padding-left: 1rem;
-    padding-right: 1rem;
 }
 
 .side-bar > * {
