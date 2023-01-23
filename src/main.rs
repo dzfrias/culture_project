@@ -93,7 +93,7 @@ fn app() -> Html {
             })
         }) as Box<dyn FnMut(_)>);
         let mut opts = IntersectionObserverInit::new();
-        opts.root_margin("-53% 0 -10% 0");
+        opts.root_margin("-53% 0% -10% 0%");
         let observer =
             IntersectionObserver::new_with_options(callback.as_ref().unchecked_ref(), &opts)
                 .unwrap();
@@ -143,8 +143,9 @@ fn app() -> Html {
             <div class={classes!("side-by-side")}>
                 <div class={classes!("side-bar")}>
                     <Quote text="The cost of bringing up two kids would kill us!" top=10 alignment="end"/>
-                    <Quote text="Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat." top=30 alignment="center"/>
+                    <Quote text="But who wants to have three kids? Young people could have two kids at most. The fundamental issue is living costs are too high and life pressures are too huge." top=30 alignment="center"/>
                     <img src="./img/gathering.jpeg" alt="A gathering forms around a One Child Policy announcement" class={classes!("fit")} style="--top: 40%;"/>
+                    <p style="--top: 60%">{ "They were sad" }</p>
                 </div>
                 <Cards
                     range={1980..2017}
@@ -156,6 +157,7 @@ fn app() -> Html {
                 />
                 <div class={classes!("side-bar")}>
                     <img src="./img/one_child.jpeg" alt="A poster describing the ideal situation involving one child" class={classes!("fit")} style="--top: 20%;"/>
+                    <Quote text="From the first day of my aunt's pregnancy, she and my uncle had to hide in order to avoid getting caught by the officials from the local family planning unit" top=45 alignment="center"/>
                     <img src="./img/one_child2.jpeg" alt="A poster saying that giving birth to one child is everyone's responsibility" class={classes!("fit")} style="--top: 60%;"/>
                 </div>
             </div>
