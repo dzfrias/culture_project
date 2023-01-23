@@ -142,7 +142,7 @@ fn app() -> Html {
             <hr/>
             <div class={classes!("side-by-side")}>
                 <div class={classes!("side-bar")}>
-                    <Quote text="Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat." top=10 alignment="end"/>
+                    <Quote text="The cost of bringing up two kids would kill us!" top=10 alignment="end"/>
                     <Quote text="Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat." top=30 alignment="center"/>
                     <img src="./img/gathering.jpeg" alt="A gathering forms around a One Child Policy announcement" class={classes!("fit")} style="--top: 40%;"/>
                 </div>

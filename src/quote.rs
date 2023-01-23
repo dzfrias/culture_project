@@ -12,7 +12,7 @@ pub struct Props {
 pub fn quote(props: &Props) -> Html {
     html! {
         <blockquote style={format!("--top: {}%; --alignment: {};", props.top, props.alignment)} class={classes!("quote")}>
-            <p>{ &props.text }</p>
+            <p><span class={classes!("pop")}>{ "\"" }</span><br/>{ &props.text }</p>
         </blockquote>
     }
 }
