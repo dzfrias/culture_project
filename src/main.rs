@@ -145,7 +145,6 @@ fn app() -> Html {
                     <Quote text="The cost of bringing up two kids would kill us!" top=10 alignment="end"/>
                     <Quote text="But who wants to have three kids? Young people could have two kids at most. The fundamental issue is living costs are too high and life pressures are too huge." top=30 alignment="center"/>
                     <img src="./img/gathering.jpeg" alt="A gathering forms around a One Child Policy announcement" class={classes!("fit")} style="--top: 40%;"/>
-                    <p style="--top: 60%">{ "They were sad" }</p>
                 </div>
                 <Cards
                     range={1980..2017}
