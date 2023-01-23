@@ -1,0 +1,35 @@
+{
+    "datasets": [
+        {
+            "label": "China",
+            "data": [0.0, 2.7, 2.6, 1.6, 1.5, 1.6, 1.7, 0.9, 0.7, 0.6, 0.7, 0.6, 0.1],
+            "bg_color": "#de314e",
+            "border_color": "#de314e"
+        },
+        {
+            "label": "World",
+            "data": [1.6, 2.1, 2.0, 1.8, 1.8, 1.8, 1.7, 1.4, 1.3, 1.3, 1.3, 1.2, 0.9],
+            "bg_color": "rgb(255, 255, 255)",
+            "border_color": "rgb(255, 255, 255)"
+        }
+    ],
+    "start": 1960,
+    "end": 2020,
+    "step": 5,
+    "opts": {
+        "scales": {
+            "y": {
+                "title": {
+                    "text": "per 1,000 population",
+                    "display": true
+                }
+            }
+        },
+        "plugins": {
+            "title": {
+                "display": true,
+                "text": "Rate of Population Change"
+            }
+        }
+    }
+}

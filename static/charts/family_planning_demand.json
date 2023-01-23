@@ -1,0 +1,35 @@
+{
+    "datasets": [
+        {
+            "label": "China",
+            "data": [41.2, 58.9, 70.1, 76.6, 82.4, 86.6, 88.5, 88.3, 88.0, 88.0, 88.0],
+            "bg_color": "#de314e",
+            "border_color": "#de314e"
+        },
+        {
+            "label": "World",
+            "data": [52.6, 58.9, 63.7, 66.9, 69.7, 72.3, 73.9, 74.8, 74.4, 73.9, 75.3],
+            "bg_color": "rgb(255, 255, 255)",
+            "border_color": "rgb(255, 255, 255)"
+        }
+    ],
+    "start": 1970,
+    "end": 2020,
+    "step": 5,
+    "opts": {
+        "scales": {
+            "y": {
+                "title": {
+                    "text": "Percent of married couples",
+                    "display": true
+                }
+            }
+        },
+        "plugins": {
+            "title": {
+                "display": true,
+                "text": "Family Planning Demand"
+            }
+        }
+    }
+}

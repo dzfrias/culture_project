@@ -44,13 +44,17 @@ fn get_datasets(s: &str) -> (Vec<Dataset>, Vec<JsValue>, JsValue) {
 
 #[function_component(App)]
 fn app() -> Html {
-    let (pop_data, pop_labels, pop_opts) = get_datasets(include_str!("../static/charts/test.json"));
+    let (age_data, age_labels, age_opts) = get_datasets(include_str!("../static/charts/test.json"));
     let (fertility_data, fertility_labels, fertility_opts) =
         get_datasets(include_str!("../static/charts/test2.json"));
+    let (pop_data, pop_labels, pop_opts) =
+        get_datasets(include_str!("../static/charts/rate_of_pop_change.json"));
+    let (planning_data, planning_labels, planning_opts) =
+        get_datasets(include_str!("../static/charts/family_planning_demand.json"));
 
-    let datasets = use_state(|| pop_data.clone());
-    let labels = use_state(|| pop_labels.clone());
-    let opts = use_state(|| pop_opts.clone());
+    let datasets = use_state(|| age_data.clone());
+    let labels = use_state(|| age_labels.clone());
+    let opts = use_state(|| age_opts.clone());
     let callback = {
         let datasets = datasets.clone();
         let opts = opts.clone();
@@ -121,8 +125,10 @@ fn app() -> Html {
             <hr/>
             <div class={classes!("center", "media-small")} >
                 <div class={classes!("side-by-side", "min-center")}>
-                    <DataButton<(Vec<Dataset>, Vec<JsValue>, JsValue)> text="Median Age" data={(pop_data, pop_labels, pop_opts)} callback={callback.clone()}/>
-                    <DataButton<(Vec<Dataset>, Vec<JsValue>, JsValue)> text="Fertility" data={(fertility_data, fertility_labels, fertility_opts)} {callback}/>
+                    <DataButton<(Vec<Dataset>, Vec<JsValue>, JsValue)> text="Median Age" data={(age_data, age_labels, age_opts)} callback={&callback}/>
+                    <DataButton<(Vec<Dataset>, Vec<JsValue>, JsValue)> text="Fertility" data={(fertility_data, fertility_labels, fertility_opts)} callback={&callback}/>
+                    <DataButton<(Vec<Dataset>, Vec<JsValue>, JsValue)> text="Family Planning" data={(planning_data, planning_labels, planning_opts)} callback={&callback}/>
+                    <DataButton<(Vec<Dataset>, Vec<JsValue>, JsValue)> text="Population Change" data={(pop_data, pop_labels, pop_opts)} {callback}/>
                 </div>
                 <Chart
                     id="main-chart"
