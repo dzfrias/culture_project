@@ -22,7 +22,9 @@
                 "title": {
                     "text": "Percent of married couples",
                     "display": true
-                }
+                },
+                "suggestedMin": 0,
+                "suggestedMax": 100
             }
         },
         "plugins": {
