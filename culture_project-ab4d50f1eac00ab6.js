@@ -779,7 +779,7 @@ function initSync(module) {
 
 async function init(input) {
     if (typeof input === 'undefined') {
-        input = new URL('culture_project-2a540ad318bad538_bg.wasm', import.meta.url);
+        input = new URL('culture_project-ab4d50f1eac00ab6_bg.wasm', import.meta.url);
     }
     const imports = getImports();
 
