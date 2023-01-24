@@ -281,3 +281,18 @@ Quote
     font-size: 1.1rem;
     font-style: italic;
 }
+
+/*
+Small Box
+-----
+*/
+.small-box {
+  max-width: 40ch;
+  text-align: center;
+  border-left: 3px double white;
+  border-right: 3px double white;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  white-space: pre-wrap;
+  font-size: 1.06rem;
+}
