@@ -82,6 +82,12 @@ button {
     transition: transform .3s ease-out;
 }
 
+button:hover {
+    background-color: var(--secondary);
+    color: var(--black);
+    transform: translate(0, -3px);
+}
+
 h1 {
     font-size: 2.5rem;
     text-align: center;
@@ -100,15 +106,8 @@ hr {
     margin-bottom: 2rem;
 }
 
-.pop {
-    font-size: 3rem;
-    margin: 0;
-}
-
-button:hover {
-    background-color: var(--secondary);
-    color: var(--black);
-    transform: translate(0, -3px);
+img {
+    filter: grayscale(100%);
 }
 
 /*
@@ -147,6 +146,11 @@ Mini-classes
         width: 60%;
         margin: auto;
     }
+}
+
+.pop {
+    font-size: 3rem;
+    margin: 0;
 }
 
 /*
